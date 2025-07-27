@@ -1,0 +1,58 @@
+name: Rebuild API Documentation
+
+on:
+  repository_dispatch:
+    types: [update-docs]
+
+jobs:
+  build-api-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout docs
+        uses: actions/checkout@v3
+
+      - name: 🔑 Checkout cocos2d-mono
+        uses: actions/checkout@v3
+        with:
+          repository: brandmooffin/cocos2d-mono
+          token: ${{ secrets.DOCS_REPO_PAT }}
+          path: cocos2d-mono
+
+      - name: ⚙️ Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: 🧰 Install DocFX
+        run: dotnet tool install -g docfx
+
+      - name: 📦 Restore API project
+        run: |
+          cd cocos2d-mono
+          dotnet restore ./cocos2d-mono.All/cocos2d-mono.All.sln
+
+      - name: 📘 Generate DocFX Metadata
+        run: |
+          cd cocos2d-mono/docfx
+          docfx metadata
+
+      - name: 🐍 Install Python & PyYAML
+        run: |
+          sudo apt-get install -y python3-pip
+          pip3 install pyyaml
+
+      - name: 🔁 Convert YAML to Markdown
+        run: |
+          python3 convert_docfx_yaml_to_md.py
+
+      - name: 📚 Build Docusaurus
+        run: |
+          npm install
+          npm run build
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
