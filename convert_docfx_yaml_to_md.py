@@ -14,7 +14,7 @@ for filename in os.listdir(INPUT_DIR):
         continue
 
     with open(os.path.join(INPUT_DIR, filename), 'r', encoding='utf-8') as file:
-        data = yaml.safe_load(file)
+        data = yaml.load(file, Loader=yaml.FullLoader)
 
     if not data or 'items' not in data:
         continue
