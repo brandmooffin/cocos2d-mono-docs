@@ -45,12 +45,12 @@ jobs:
 
       - name: 🐍 Install Python & PyYAML
         run: |
-          sudo apt-get install -y python3-pip
-          pip3 install pyyaml
+          python -m pip install --upgrade pip
+          pip install pyyaml
 
       - name: 🔁 Convert YAML to Markdown
         run: |
-          python3 convert_docfx_yaml_to_md.py
+          python convert_docfx_yaml_to_md.py
 
       - name: 📚 Build Docusaurus
         run: |
