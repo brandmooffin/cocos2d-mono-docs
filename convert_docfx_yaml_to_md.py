@@ -44,7 +44,7 @@ for filename in os.listdir(INPUT_DIR):
 
     for item in data['items']:
         uid = item.get('uid', 'unknown')
-        name = item.get('name') or uid
+        name = str(item.get('name') or uid or 'Unknown')
         type_ = item.get('type', '')
         summary = item.get('summary', '')
         syntax = item.get('syntax', {}).get('content', '')
