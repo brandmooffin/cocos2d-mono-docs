@@ -1,35 +1,41 @@
 import os
+import re
 import yaml
 import hashlib
-import re
 
 INPUT_DIR = os.path.join("cocos2d-mono", "docfx", "api")
 OUTPUT_DIR = os.path.join("docs", "api")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# YAML loader that ignores unknown tags (e.g. !!value)
+# YAML loader that ignores unknown tags (like !!value)
 class IgnoreUnknownTagsLoader(yaml.SafeLoader):
     def construct_undefined(self, node):
         return self.construct_scalar(node)
 
 IgnoreUnknownTagsLoader.add_constructor(None, IgnoreUnknownTagsLoader.construct_undefined)
 
-def escape_yaml_string(value):
-    # Quote the string and escape internal quotes
-    escaped = str(value).replace('"', '\\"')
-    return f'"{escaped}"'
-
 def sanitize_filename(uid):
     # Remove illegal filename characters (Windows-safe)
     safe = re.sub(r'[<>:"/\\|?*@(),]', '', uid)
 
-    # Truncate long filenames and add hash to ensure uniqueness
+    # Truncate and append a hash if it's too long
     if len(safe) > 100:
         hash_suffix = hashlib.md5(uid.encode('utf-8')).hexdigest()[:8]
         safe = safe[:80] + '-' + hash_suffix
 
     return safe
+
+def sanitize_id(uid):
+    # Replace forward slashes (which are illegal in Docusaurus ids)
+    safe = re.sub(r'[\/]', '.', uid)
+    # Optionally: strip other problematic characters
+    return safe
+
+def escape_yaml_string(value):
+    """Escape and quote YAML-safe string"""
+    escaped = str(value).replace('"', '\\"')
+    return f'"{escaped}"'
 
 for filename in os.listdir(INPUT_DIR):
     if not filename.endswith(".yml"):
@@ -40,16 +46,14 @@ for filename in os.listdir(INPUT_DIR):
         try:
             data = yaml.load(file, Loader=IgnoreUnknownTagsLoader)
         except yaml.YAMLError as e:
-            print(f"⚠️ Skipping {filename} due to YAML error: {e}")
+            print(f"Skipping {filename} due to YAML error: {e}")
             continue
 
     if not data or 'items' not in data:
         continue
 
     for item in data['items']:
-        uid = item.get('uid') or 'unknown'
-
-# Force name to string; fall back if None or not a string
+        uid = str(item.get('uid') or 'unknown')
         raw_name = item.get('name')
         name = str(raw_name) if isinstance(raw_name, str) and raw_name.strip() else uid
         type_ = item.get('type', '')
@@ -61,7 +65,7 @@ for filename in os.listdir(INPUT_DIR):
 
         # Build Markdown content
         md = f"""---
-id: {uid.replace('/', '.').replace('#', '')}
+id: {sanitize_id(uid)}
 title: {escape_yaml_string(name)}
 ---
 
@@ -93,8 +97,13 @@ title: {escape_yaml_string(name)}
         if returns:
             md += f"## Returns\n\n{returns}\n"
 
-        output_file = os.path.join(OUTPUT_DIR, f"{sanitize_filename(uid)}.md")
-        with open(output_file, 'w', encoding='utf-8') as mdfile:
-            mdfile.write(md)
+        output_filename = sanitize_filename(uid) + ".md"
+        output_path = os.path.join(OUTPUT_DIR, output_filename)
 
-print("YAML successfully converted to Docusaurus-compatible Markdown.")
+        try:
+            with open(output_path, 'w', encoding='utf-8') as mdfile:
+                mdfile.write(md)
+        except OSError as e:
+            print(f"Failed to write {output_filename}: {e}")
+
+print("✔ YAML successfully converted to Docusaurus-compatible Markdown.")
