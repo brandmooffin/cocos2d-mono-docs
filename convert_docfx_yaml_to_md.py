@@ -106,4 +106,4 @@ title: {escape_yaml_string(name)}
         except OSError as e:
             print(f"Failed to write {output_filename}: {e}")
 
-print("✔ YAML successfully converted to Docusaurus-compatible Markdown.")
+print("YAML successfully converted to Docusaurus-compatible Markdown.")
