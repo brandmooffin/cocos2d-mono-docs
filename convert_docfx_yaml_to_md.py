@@ -61,7 +61,7 @@ for filename in os.listdir(INPUT_DIR):
 
         # Build Markdown content
         md = f"""---
-id: {uid.replace('/', '.')}
+id: {uid.replace('/', '.').replace('#', '')}
 title: {escape_yaml_string(name)}
 ---
 
