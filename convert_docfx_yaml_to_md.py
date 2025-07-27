@@ -6,15 +6,28 @@ OUTPUT_DIR = os.path.join("docs", "api")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+# YAML loader that ignores unknown tags (e.g. !!value)
+class IgnoreUnknownTagsLoader(yaml.SafeLoader):
+    def construct_undefined(self, node):
+        return self.construct_scalar(node)
+
+IgnoreUnknownTagsLoader.add_constructor(None, IgnoreUnknownTagsLoader.construct_undefined)
+
 def sanitize_filename(uid):
+    """Replace characters not allowed in filenames."""
     return uid.replace('<', '').replace('>', '').replace(':', '').replace('*', '').replace('?', '').replace('/', '_')
 
 for filename in os.listdir(INPUT_DIR):
     if not filename.endswith(".yml"):
         continue
 
-    with open(os.path.join(INPUT_DIR, filename), 'r', encoding='utf-8') as file:
-        data = yaml.load(file, Loader=yaml.FullLoader)
+    filepath = os.path.join(INPUT_DIR, filename)
+    with open(filepath, 'r', encoding='utf-8') as file:
+        try:
+            data = yaml.load(file, Loader=IgnoreUnknownTagsLoader)
+        except yaml.YAMLError as e:
+            print(f"⚠️ Skipping {filename} due to YAML error: {e}")
+            continue
 
     if not data or 'items' not in data:
         continue
@@ -29,7 +42,7 @@ for filename in os.listdir(INPUT_DIR):
         returns = item.get('returns', '')
         inheritance = item.get('inheritance', [])
 
-        # Markdown content
+        # Build Markdown content
         md = f"""---
 id: {uid}
 title: {name}
@@ -63,9 +76,8 @@ title: {name}
         if returns:
             md += f"## Returns\n\n{returns}\n"
 
-        # Output file
-        out_file = os.path.join(OUTPUT_DIR, f"{sanitize_filename(uid)}.md")
-        with open(out_file, 'w', encoding='utf-8') as mdfile:
+        output_file = os.path.join(OUTPUT_DIR, f"{sanitize_filename(uid)}.md")
+        with open(output_file, 'w', encoding='utf-8') as mdfile:
             mdfile.write(md)
 
-print("✅ YAML converted to Docusaurus-compatible Markdown.")
+print("✅ YAML successfully converted to Docusaurus-compatible Markdown.")
