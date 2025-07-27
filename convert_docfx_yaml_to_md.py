@@ -17,7 +17,7 @@ IgnoreUnknownTagsLoader.add_constructor(None, IgnoreUnknownTagsLoader.construct_
 
 def sanitize_filename(uid):
     # Remove illegal filename characters (Windows-safe)
-    safe = re.sub(r'[<>:"/\\|?*@(),]#`', '', uid)
+    safe = re.sub(r'[<>:"/\\|?*@()#`,]', '', uid)
 
     # Truncate and append a hash if it's too long
     if len(safe) > 100:
