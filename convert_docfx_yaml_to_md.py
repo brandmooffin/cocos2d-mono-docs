@@ -64,9 +64,16 @@ for filename in os.listdir(INPUT_DIR):
         returns = item.get('returns', '')
         inheritance = item.get('inheritance', [])
 
-        # Build Markdown content
+        sanitized_id = sanitize_id(uid)
+
+				if ':' in sanitized_id:
+    			print(f" UNSAFE ID: {uid} → {sanitized_id}")
+
+				print(f" Writing: {uid} → {sanitized_id}")
+				
+				# Build Markdown content
         md = f"""---
-id: {sanitize_id(uid)}
+id: {sanitized_id}
 title: {escape_yaml_string(name)}
 ---
 
