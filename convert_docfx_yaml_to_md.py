@@ -90,4 +90,4 @@ title: {name}
         with open(output_file, 'w', encoding='utf-8') as mdfile:
             mdfile.write(md)
 
-print("✅ YAML successfully converted to Docusaurus-compatible Markdown.")
+print("YAML successfully converted to Docusaurus-compatible Markdown.")
