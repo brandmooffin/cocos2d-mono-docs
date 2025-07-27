@@ -15,6 +15,10 @@ class IgnoreUnknownTagsLoader(yaml.SafeLoader):
 
 IgnoreUnknownTagsLoader.add_constructor(None, IgnoreUnknownTagsLoader.construct_undefined)
 
+def escape_yaml_string(value):
+    # Quote the string and escape internal quotes
+    escaped = str(value).replace('"', '\\"')
+    return f'"{escaped}"'
 
 def sanitize_filename(uid):
     # Remove illegal filename characters (Windows-safe)
@@ -43,8 +47,11 @@ for filename in os.listdir(INPUT_DIR):
         continue
 
     for item in data['items']:
-        uid = item.get('uid', 'unknown')
-        name = str(item.get('name') or uid or 'Unknown')
+        uid = item.get('uid') or 'unknown'
+
+# Force name to string; fall back if None or not a string
+raw_name = item.get('name')
+name = str(raw_name) if isinstance(raw_name, str) and raw_name.strip() else uid
         type_ = item.get('type', '')
         summary = item.get('summary', '')
         syntax = item.get('syntax', {}).get('content', '')
@@ -55,7 +62,7 @@ for filename in os.listdir(INPUT_DIR):
         # Build Markdown content
         md = f"""---
 id: {uid}
-title: {name}
+title: {escape_yaml_string(name)}
 ---
 
 # {name}
