@@ -1,8 +1,8 @@
 import os
 import yaml
 
-INPUT_DIR = "docfx/api"
-OUTPUT_DIR = "docs/api"
+INPUT_DIR = os.path.join("cocos2d-mono", "docfx", "api")
+OUTPUT_DIR = os.path.join("docs", "api")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
