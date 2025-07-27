@@ -1,5 +1,7 @@
 import os
 import yaml
+import hashlib
+import re
 
 INPUT_DIR = os.path.join("cocos2d-mono", "docfx", "api")
 OUTPUT_DIR = os.path.join("docs", "api")
@@ -13,9 +15,17 @@ class IgnoreUnknownTagsLoader(yaml.SafeLoader):
 
 IgnoreUnknownTagsLoader.add_constructor(None, IgnoreUnknownTagsLoader.construct_undefined)
 
+
 def sanitize_filename(uid):
-    """Replace characters not allowed in filenames."""
-    return uid.replace('<', '').replace('>', '').replace(':', '').replace('*', '').replace('?', '').replace('/', '_')
+    # Remove illegal filename characters (Windows-safe)
+    safe = re.sub(r'[<>:"/\\|?*@(),]', '', uid)
+
+    # Truncate long filenames and add hash to ensure uniqueness
+    if len(safe) > 100:
+        hash_suffix = hashlib.md5(uid.encode('utf-8')).hexdigest()[:8]
+        safe = safe[:80] + '-' + hash_suffix
+
+    return safe
 
 for filename in os.listdir(INPUT_DIR):
     if not filename.endswith(".yml"):
