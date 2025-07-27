@@ -27,9 +27,10 @@ def sanitize_filename(uid):
     return safe
 
 def sanitize_id(uid):
-    # Replace forward slashes (which are illegal in Docusaurus ids)
-    safe = re.sub(r'[\/]', '.', uid)
-    # Optionally: strip other problematic characters
+    safe = re.sub(r'[\/:<>\"|?*@(),]', '.', uid)  # Strip problem characters
+    if len(safe) > 100:
+        hash_suffix = hashlib.md5(uid.encode('utf-8')).hexdigest()[:8]
+        safe = safe[:80] + '-' + hash_suffix
     return safe
 
 def escape_yaml_string(value):
