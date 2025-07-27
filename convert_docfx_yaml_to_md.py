@@ -50,8 +50,8 @@ for filename in os.listdir(INPUT_DIR):
         uid = item.get('uid') or 'unknown'
 
 # Force name to string; fall back if None or not a string
-raw_name = item.get('name')
-name = str(raw_name) if isinstance(raw_name, str) and raw_name.strip() else uid
+        raw_name = item.get('name')
+        name = str(raw_name) if isinstance(raw_name, str) and raw_name.strip() else uid
         type_ = item.get('type', '')
         summary = item.get('summary', '')
         syntax = item.get('syntax', {}).get('content', '')
