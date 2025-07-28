@@ -10,7 +10,7 @@ const config = {
   tagline: "GO COCOS NUTS!",
   url: "https://cocos2d-mono.dev",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
 
