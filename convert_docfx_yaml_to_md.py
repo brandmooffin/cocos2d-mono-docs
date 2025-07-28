@@ -66,12 +66,12 @@ for filename in os.listdir(INPUT_DIR):
 
         sanitized_id = sanitize_id(uid)
 
-				if ':' in sanitized_id:
-    			print(f" UNSAFE ID: {uid} → {sanitized_id}")
+        if ':' in sanitized_id:
+            print(f" UNSAFE ID: {uid} → {sanitized_id}")
 
-				print(f" Writing: {uid} → {sanitized_id}")
+        print(f" Writing: {uid} → {sanitized_id}")
 				
-				# Build Markdown content
+        # Build Markdown content
         md = f"""---
 id: {sanitized_id}
 title: {escape_yaml_string(name)}
