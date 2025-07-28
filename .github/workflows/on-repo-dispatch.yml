@@ -41,7 +41,7 @@ jobs:
       - name: 📘 Generate DocFX Metadata
         run: |
           cd cocos2d-mono/docfx
-          docfx metadata --outputFormat markdown --output ./docs/api
+          docfx metadata --outputFormat markdown --output ../../docs/api
 
       - name: 📦 Create zip archive of docfx YAML
         run: |
