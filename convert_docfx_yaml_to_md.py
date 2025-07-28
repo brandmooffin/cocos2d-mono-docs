@@ -17,7 +17,7 @@ IgnoreUnknownTagsLoader.add_constructor(None, IgnoreUnknownTagsLoader.construct_
 
 def sanitize_filename(uid):
     # Remove illegal filename characters (Windows-safe)
-    safe = re.sub(r'[<>:"/\\|?*@()#`,]', '', uid)
+    safe = re.sub(r'[<>:"/\\|?*@()#`,\[\]{}]', '', uid)
 
     # Truncate and append a hash if it's too long
     if len(safe) > 100:
@@ -27,7 +27,7 @@ def sanitize_filename(uid):
     return safe
 
 def sanitize_id(uid):
-    safe = re.sub(r'[\/:<>\"|?*@(),]', '.', uid)  # Strip problem characters
+    safe = re.sub(r'[\/:<>\"|?*@()#`,\[\]{}]', '.', uid)  # Strip problem characters
     if len(safe) > 100:
         hash_suffix = hashlib.md5(uid.encode('utf-8')).hexdigest()[:8]
         safe = safe[:80] + '-' + hash_suffix
