@@ -41,11 +41,11 @@ jobs:
       - name: 📘 Generate DocFX Metadata
         run: |
           cd cocos2d-mono/docfx
-          docfx metadata --outputFormat markdown
+          docfx metadata --outputFormat markdown --output ./docs/api
 
       - name: 📦 Create zip archive of docfx YAML
         run: |
-          powershell -Command "Compress-Archive -Path cocos2d-mono/docfx/api/* -DestinationPath docfx-yaml.zip"
+          powershell -Command "Compress-Archive -Path docs/api/* -DestinationPath docfx-yaml.zip"
 
       - name: 📤 Upload docfx YAML as artifact
         uses: actions/upload-artifact@v4
