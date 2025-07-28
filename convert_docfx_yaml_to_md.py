@@ -67,9 +67,9 @@ for filename in os.listdir(INPUT_DIR):
         sanitized_id = sanitize_id(uid)
 
         if ':' in sanitized_id:
-            print(f" UNSAFE ID: {uid} → {sanitized_id}")
+            print(f" UNSAFE ID: {uid} > {sanitized_id}")
 
-        print(f" Writing: {uid} → {sanitized_id}")
+        print(f" Writing: {uid} > {sanitized_id}")
 				
         # Build Markdown content
         md = f"""---
