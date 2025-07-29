@@ -8,7 +8,7 @@ Now that you have your first game running you might want to add some new content
 
 This tutorial will go over adding content such as images or sounds to your game.
 
-> For help with creating a project, please look at the [Create a New Project](/docs/developing/create-project.md) section of the Developing guide.
+> For help with creating a project, please look at the [Create a New Project](/docs/guides/developing/create-project.md) section of the Developing guide.
 
 ## MonoGame Content Builder Tool (MGCB Editor)
 
@@ -20,19 +20,19 @@ This is technically optional, since you can edit the .mgcb files manually if you
 
 First, you will need some content for your game. For this tutorial, use the following image:
 
-![Sample Image](../../static/img/logo.png)
+![Sample Image](../../../static/img/logo.png)
 
 Copy the image to your machine by using right-click > Save Image As and save it somewhere locally with the name “sample.png”.
 
 Now open up your game project and look at the Solution Explorer window. Expand the Content folder and open up Content.mgcb file by double-clicking on it.
 
-![Content File](../../static/img/vs-content-file.png)
+![Content File](../../../static/img/vs-content-file.png)
 
 You should now see the MGCB Editor window open up. If a text file opens instead, then right-click on Content.mgcb and select Open With, then select MGCB Editor in the list, click Set as Default and then click OK, then try again.
 
 > If you do not see the MGCB Editor option when you right-click and select Open With, then please review MonoGame's [Tools documentation](https://docs.monogame.net/articles/tools/tools.html) for installing the MGCB Editor tool for your operating system.
 
-![Content Editor](../../static/img/content-editor.png)
+![Content Editor](../../../static/img/content-editor.png)
 
 Your game content is managed from this external tool. You can add content to your game in one of the following ways:
 
@@ -42,15 +42,15 @@ Your game content is managed from this external tool. You can add content to you
 
 Make sure the "Content" MGCB file is selected to the left, then click the Add Existing Item toolbar button.
 
-![Add Content](../../static/img/add-content.png)
+![Add Content](../../../static/img/add-content.png)
 
 You should now be prompted to select a file. Select the "sample.png” image that you downloaded a moment ago. Once you have confirmed your selection, you will be asked whether to copy the file, add a link to it, or skip it. Make sure "Copy the file to the directory" option is selected and click Add.
 
-![Select Sample](../../static/img/select-sample.png)
+![Select Sample](../../../static/img/select-sample.png)
 
 Now click the Save toolbar button and close the MGCB Editor tool.
 
-![Save Content](../../static/img/save-content.png)
+![Save Content](../../../static/img/save-content.png)
 
 ## Adding the content in your game
 
@@ -97,4 +97,4 @@ When you are done it should look something like this
 
 Now run the game. You should get the following:
 
-![Game Content Running](../../static/img/game-content-running.png)
+![Game Content Running](../../../static/img/game-content-running.png)

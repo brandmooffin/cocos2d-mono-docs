@@ -41,7 +41,7 @@ We support a growing list of platforms across the desktop, mobile, and console s
 
 If you think you have found a bug or have a feature request, use the [issue tracker](https://github.com/brandmooffin/Cocos2D-Mono/issues). Before opening a new issue, please search to see if your problem has already been reported. Try to be as detailed as possible in your issue reports.
 
-If you are interested in contributing fixes or features to Cocos2D-Mono, please read our [contributors guide](/docs/contributing/getting-involved.md) first.
+If you are interested in contributing fixes or features to Cocos2D-Mono, please read our [contributors guide](/docs/guides/contributing/getting-involved.md) first.
 
 ## Tests
 

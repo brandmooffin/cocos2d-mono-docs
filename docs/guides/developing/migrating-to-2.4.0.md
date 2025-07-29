@@ -6,7 +6,7 @@ sidebar_position: 4
 
 Migrating from 2.3.X should be straightforward for most platforms.
 
-The major difference is that 2.4.0 now requires .NET 6 and Visual Studio 2022. You can follow the [environment setup tutorial](/docs/getting-started/environment-setup.md) to make sure that you are not missing any components.
+The major difference is that 2.4.0 now requires .NET 6 and Visual Studio 2022. You can follow the [environment setup tutorial](/docs/guides/getting-started/environment-setup.md) to make sure that you are not missing any components.
 
 It is recommend that you use the updated [Cocos2D-Mono Visual Studio 2022 Extension](https://marketplace.visualstudio.com/items?itemName=Cocos2D-MonoTeamBrokenWallsStudios.cocos2dmonoprojecttemplates) which contains the new project templates that will help with the migration process.
 

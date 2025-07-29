@@ -59,14 +59,14 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "getting-started/introduction",
+            docId: "guides/getting-started/introduction",
             position: "left",
             label: "Guides",
           },
           {
-            type: "doc",
-            docId: "api/introduction",
+            type: "docSidebar",
             position: "left",
+            sidebarId: "api",
             label: "API",
           },
           { to: "/blog", label: "Blog", position: "left" },
@@ -95,7 +95,7 @@ const config = {
               },
               {
                 label: "Getting Started",
-                to: "/docs/getting-started/introduction",
+                to: "/docs/guides/getting-started/introduction",
               },
               {
                 label: "Tutorials",
