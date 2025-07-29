@@ -1,0 +1,8 @@
+{
+  "label": "API",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Explore the Cocos2d-Mono API documentation to understand the framework's classes, methods, and properties. This section provides detailed information on how to use the API effectively in your projects."
+  }
+}

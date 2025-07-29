@@ -63,6 +63,12 @@ const config = {
             position: "left",
             label: "Guides",
           },
+          {
+            type: "doc",
+            docId: "api/introduction",
+            position: "left",
+            label: "API",
+          },
           { to: "/blog", label: "Blog", position: "left" },
           {
             type: "doc",
@@ -94,6 +100,10 @@ const config = {
               {
                 label: "Tutorials",
                 to: "/docs/tutorials/introduction",
+              },
+              {
+                label: "API",
+                to: "/docs/api/introduction",
               },
             ],
           },
