@@ -50,16 +50,6 @@ jobs:
           cd cocos2d-mono/docfx
           docfx metadata --outputFormat markdown --output ../../docs
 
-      - name: 📦 Create zip archive of docfx YAML
-        run: |
-          powershell -Command "Compress-Archive -Path docs/api/* -DestinationPath docfx-yaml.zip"
-
-      - name: 📤 Upload docfx YAML as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: docfx-yaml
-          path: docfx-yaml.zip
-
       - name: 📝 Add frontmatter to API docs
         run: |
           Get-ChildItem -Path "docs/api" -Filter "*.md" -Recurse | Where-Object { $_.Name -ne "introduction.md" } | ForEach-Object {
@@ -71,6 +61,16 @@ jobs:
             }
           }
         shell: pwsh
+
+      - name: 📦 Create zip archive of docfx YAML
+        run: |
+          powershell -Command "Compress-Archive -Path docs/api/* -DestinationPath docfx-yaml.zip"
+
+      - name: 📤 Upload docfx YAML as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docfx-yaml
+          path: docfx-yaml.zip
 
       - name: 📚 Build Docusaurus
         run: |
