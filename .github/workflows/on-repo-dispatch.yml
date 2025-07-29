@@ -75,7 +75,7 @@ jobs:
       - name: 📚 Build Docusaurus
         run: |
           npm install
-          npm run build
+          set NODE_OPTIONS=--max-old-space-size=4096 && npm run build
 
       - name: Copy CNAME
         run: cp ./CNAME ./build/CNAME
