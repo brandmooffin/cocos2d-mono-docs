@@ -40,6 +40,11 @@ jobs:
           cd cocos2d-mono
           dotnet restore ./cocos2d-mono.All/cocos2d-mono.All.sln
 
+      - name: 📖 Build API project
+        run: |
+          cd cocos2d-mono
+          dotnet build ./cocos2d-mono.All/cocos2d-mono.All.sln --configuration Release
+
       - name: 📘 Generate DocFX Metadata
         run: |
           cd cocos2d-mono/docfx
