@@ -56,44 +56,51 @@ Now click the Save toolbar button and close the MGCB Editor tool.
 
 Now that you have added the asset to the Content project, it is time to load it into your game. First, open up the IntroLayer.cs class file and declare a new sampleSprite variable of type CCSprite in the IntroLayer class constructor, this will load your new image as a texture in memory and create a new easy to use sprite.
 
-    public class IntroLayer : CCLayerColor
-    {
-        public IntroLayer()
-        {
-            var sampleSprite = new CCSprite("sample");
-            ...
-        }
-
-Next, set a position for the sampleSprite
-
-    sampleSprite.Position = new CCPoint(CCDirector.SharedDirector.WinSize.Center.X, 120);
-
-Finally, just add the new sprite to the scene
-
-    AddChild(sampleSprite);
-
-When you are done it should look something like this
-
+```csharp
+public class IntroLayer : CCLayerColor
+{
     public IntroLayer()
     {
         var sampleSprite = new CCSprite("sample");
-        sampleSprite.Position = new CCPoint(CCDirector.SharedDirector.WinSize.Center.X, 120);
-
-        // create and initialize a Label
-        var label = new CCLabelTTF("Hello World!", "MarkerFelt", 22)
-        {
-            // position the label on the center of the screen
-            Position = CCDirector.SharedDirector.WinSize.Center
-        };
-
-        // add the label as a child to this Layer
-        AddChild(label);
-        AddChild(sampleSprite);
-
-        // setup our color for the background
-        Color = new CCColor3B(Microsoft.Xna.Framework.Color.Blue);
-        Opacity = 255;
+        ...
     }
+```
+
+Next, set a position for the sampleSprite
+```csharp
+sampleSprite.Position = new CCPoint(CCDirector.SharedDirector.WinSize.Center.X, 120);
+```
+
+Finally, just add the new sprite to the scene
+
+```csharp
+AddChild(sampleSprite);
+```
+
+When you are done it should look something like this
+
+```csharp
+public IntroLayer()
+{
+    var sampleSprite = new CCSprite("sample");
+    sampleSprite.Position = new CCPoint(CCDirector.SharedDirector.WinSize.Center.X, 120);
+
+    // create and initialize a Label
+    var label = new CCLabelTTF("Hello World!", "MarkerFelt", 22)
+    {
+        // position the label on the center of the screen
+        Position = CCDirector.SharedDirector.WinSize.Center
+    };
+
+    // add the label as a child to this Layer
+    AddChild(label);
+    AddChild(sampleSprite);
+
+    // setup our color for the background
+    Color = new CCColor3B(Microsoft.Xna.Framework.Color.Blue);
+    Opacity = 255;
+}
+```
 
 Now run the game. You should get the following:
 

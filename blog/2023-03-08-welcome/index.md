@@ -5,7 +5,7 @@ authors: [brandmooffin]
 tags: [update, release, 2.4.0]
 ---
 
-![Docusaurus Plushie](./logo-full-release.png)
+![Release Logo](./logo-full-release.png)
 
 Cocos2D-Mono 2.4.0 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.0) to see what's change...or just read below.
 
