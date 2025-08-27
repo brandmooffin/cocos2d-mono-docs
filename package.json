@@ -21,7 +21,8 @@
     "clsx": "^1.2.1",
     "prism-react-renderer": "2.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "cheerio": "1.0.0-rc.12"
   },
   "overrides": {
     "@cmfcmf/docusaurus-search-local": {
