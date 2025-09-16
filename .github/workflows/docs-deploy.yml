@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - update/docfx-markdown-support
 
 jobs:
   deploy:
@@ -22,6 +23,7 @@ jobs:
           repository: brandmooffin/cocos2d-mono
           token: ${{ secrets.DOCS_REPO_PAT }}
           path: cocos2d-mono
+          ref: update/docfx-config-changes
 
       - name: ⚙️ Setup .NET SDK
         uses: actions/setup-dotnet@v4
@@ -47,21 +49,37 @@ jobs:
           cd cocos2d-mono
           dotnet build ./cocos2d-mono.All/cocos2d-mono.All.sln --configuration Release
 
+      # - name: 📘 Generate DocFX Metadata
+      #   run: |
+      #     cd cocos2d-mono/docfx
+      #     docfx metadata --outputFormat markdown --output ../../docs
+
+      # - name: 📝 Add frontmatter to API docs
+      #   run: |
+      #     Get-ChildItem -Path "docs/api" -Filter "*.md" -Recurse | Where-Object { $_.Name -ne "introduction.md" } | ForEach-Object {
+      #       $content = Get-Content $_.FullName -Raw
+      #       if ($content -and -not $content.StartsWith("___")) {
+      #         $newContent = "___`n" + $content
+      #         Set-Content -Path $_.FullName -Value $newContent -NoNewline
+      #         Write-Host "Updated: $($_.FullName)"
+      #       }
+      #     }
+      #   shell: pwsh
+
       - name: 📘 Generate DocFX Metadata
         run: |
           cd cocos2d-mono/docfx
-          docfx metadata --outputFormat markdown --output ../../docs
+          docfx metadata
 
       - name: 📝 Add frontmatter to API docs
         run: |
-          Get-ChildItem -Path "docs/api" -Filter "*.md" -Recurse | Where-Object { $_.Name -ne "introduction.md" } | ForEach-Object {
-            $content = Get-Content $_.FullName -Raw
-            if ($content -and -not $content.StartsWith("___")) {
-              $newContent = "___`n" + $content
-              Set-Content -Path $_.FullName -Value $newContent -NoNewline
-              Write-Host "Updated: $($_.FullName)"
-            }
+          # Ensure the scripts directory exists
+          if (-not (Test-Path "scripts")) {
+            New-Item -ItemType Directory -Path "scripts"
           }
+
+          # Process DocFX output for MDX compatibility
+          node scripts/process-docfx-output.js
         shell: pwsh
 
       - name: 📦 Create zip archive of docfx YAML
