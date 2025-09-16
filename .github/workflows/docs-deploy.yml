@@ -71,7 +71,10 @@ jobs:
           cd cocos2d-mono/docfx
           docfx metadata
 
-      - name: 📝 Add frontmatter to API docs
+      - name: 📦 Install Node.js dependencies
+        run: npm install
+
+      - name: 📝 Process DocFX output to MDX
         run: |
           # Ensure the scripts directory exists
           if (-not (Test-Path "scripts")) {
@@ -94,7 +97,6 @@ jobs:
 
       - name: 📚 Build Docusaurus
         run: |
-          npm install
           npm run build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
