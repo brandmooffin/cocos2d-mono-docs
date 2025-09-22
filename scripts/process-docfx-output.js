@@ -347,10 +347,11 @@ function sanitizeForMdx(text) {
 
 function sanitizeForJsx(text) {
   if (!text) return "";
-
   return String(text)
-    .replace(/\\/g, "\\\\")
+    .replace(/\\/g, "")
     .replace(/"/g, '\\"')
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
     .replace(/\r\n/g, " ")
     .replace(/\n/g, " ")
     .replace(/\s+/g, " ")
