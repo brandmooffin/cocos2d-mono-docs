@@ -347,15 +347,25 @@ function sanitizeForMdx(text) {
 
 function sanitizeForJsx(text) {
   if (!text) return "";
-  return String(text)
-    .replace(/\\/g, "")
-    .replace(/"/g, '\\"')
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\r\n/g, " ")
-    .replace(/\n/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+
+  return (
+    String(text)
+      // First handle backslashes - must be first to avoid double escaping
+      .replace(/\\/g, "\\\\")
+      // Handle quotes
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;")
+      // Handle angle brackets for generics
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      // Handle other problematic characters
+      .replace(/&/g, "&amp;")
+      // Clean up whitespace
+      .replace(/\r\n/g, " ")
+      .replace(/\n/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
 }
 
 function sanitizeCodeBlock(code) {
@@ -367,11 +377,16 @@ function sanitizeCodeBlock(code) {
 function sanitizeId(id) {
   if (!id) return "unknown";
 
-  return String(id)
-    .replace(/[^a-zA-Z0-9._-]/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .replace(/-+/g, "-")
-    .toLowerCase();
+  return (
+    String(id)
+      // Replace any non-alphanumeric characters with dashes
+      .replace(/[^a-zA-Z0-9._-]/g, "-")
+      // Remove leading/trailing dashes
+      .replace(/^-+|-+$/g, "")
+      // Collapse multiple dashes
+      .replace(/-+/g, "-")
+      .toLowerCase()
+  );
 }
 
 function createFallbackContent(filename) {
