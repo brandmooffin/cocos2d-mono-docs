@@ -1,0 +1,5 @@
+# Auto-generated API documentation
+# These files are generated from DocFX output
+*.md
+!index.md
+!_category_.json

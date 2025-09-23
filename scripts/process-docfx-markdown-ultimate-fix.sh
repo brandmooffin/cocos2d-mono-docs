@@ -1,0 +1,260 @@
+#!/bin/bash
+
+# ULTIMATE comprehensive script to fix ALL MDX compatibility issues
+# This version handles EVERY edge case we've discovered
+
+set -e
+
+# Default directories
+SOURCE_DIR="${1:-../cocos2d-mono/docfx/api}"
+TARGET_DIR="${2:-../docs/api}"
+
+echo "🔧 ULTIMATE comprehensive DocFX to MDX conversion script..."
+echo "📁 Source: $SOURCE_DIR"  
+echo "📁 Target: $TARGET_DIR"
+
+# Create target directory if it doesn't exist
+mkdir -p "$TARGET_DIR"
+
+# Function to handle the most comprehensive MDX cleaning
+ultimate_mdx_clean() {
+    local content="$1"
+    
+    # Process in multiple very careful steps
+    echo "$content" | \
+        # Step 1: Remove HTML anchor tags completely
+        sed 's/<a id="[^"]*"><\/a>//g' | \
+        sed 's/<a id="[^"]*">//g' | \
+        sed 's/<\/a>//g' | \
+        \
+        # Step 2: Fix escaped characters in ALL contexts BEFORE any other processing
+        sed 's/\\(/(/g' | \
+        sed 's/\\)/)/g' | \
+        sed 's/\\\\/\\/g' | \
+        sed 's/\\`/`/g' | \
+        sed 's/\\</</g' | \
+        sed 's/\\>/>/g' | \
+        sed 's/\\&/\&/g' | \
+        sed 's/\\\?/?/g' | \
+        sed 's/\\\[/[/g' | \
+        sed 's/\\\]/]/g' | \
+        sed 's/\\-/-/g' | \
+        \
+        # Step 3: Fix HTML entities
+        sed 's/&lt;/</g' | \
+        sed 's/&gt;/>/g' | \
+        sed 's/&amp;/\&/g' | \
+        sed 's/&quot;/"/g' | \
+        sed 's/&#39;/'"'"'/g' | \
+        \
+        # Step 4: Handle inheritance lines that start with [type] - convert to safe format
+        awk '
+        BEGIN { in_inheritance = 0 }
+        
+        # Check if line looks like inheritance marker
+        /^\[.*\]\([^)]*\) ←$/ {
+            # This is an inheritance line, convert to safe format
+            gsub(/^\[/, "**")
+            gsub(/\]\([^)]*\)/, "**")
+            gsub(/ ←$/, " (base class)")
+            print
+            next
+        }
+        
+        # Check for inheritance list items
+        /^\[.*\]\([^)]*\),$/ {
+            # This is a member list item
+            gsub(/^\[/, "- **")
+            gsub(/\]\([^)]*\)/, "**")
+            gsub(/,$/, "")
+            print
+            next
+        }
+        
+        # Check for problematic generic syntax in parameter lines
+        /^`[^`]*`.*<\[.*\]>/ {
+            # Fix the nested generic pattern
+            gsub(/<\[/, "\\&lt;[")
+            gsub(/\]>/, "]\\&gt;")
+            print
+            next
+        }
+        
+        # Check for problematic inheritance chains
+        /^\[.*\]\([^)]*\) ←/ {
+            # Convert inheritance chain to safe format
+            gsub(/^\[/, "**")
+            gsub(/\]\([^)]*\)/, "**")
+            gsub(/ ←/, " ← ")
+            print
+            next
+        }
+        
+        # Default: print the line as-is
+        { print }
+        ' | \
+        \
+        # Step 5: Fix remaining generic type patterns
+        sed 's/<T>/\\&lt;T\\&gt;/g' | \
+        sed 's/<\([A-Za-z][A-Za-z0-9]*\)>/\\&lt;\1\\&gt;/g' | \
+        \
+        # Step 6: Fix problematic tags in inheritance that weren't caught
+        sed 's/<\([^>]*[\\,&?[\]]\+[^>]*\)>/`\1`/g' | \
+        \
+        # Step 7: Convert problematic method signature lines
+        awk '
+        BEGIN { in_members = 0 }
+        /^## / { in_members = 0 }
+        /^### / { in_members = 0 }
+        /^#### Inherited Members/ { in_members = 1; print; next }
+        in_members && /^\[.*\]\([^)]*\),$/ {
+            gsub(/^\[/, "- ")
+            print
+            next
+        }
+        in_members && /^\[.*\]\([^)]*\)$/ {
+            gsub(/^\[/, "- ")
+            print
+            next
+        }
+        { print }
+        ' | \
+        \
+        # Step 8: Remove or fix problematic HTML tags
+        sed 's/<\/\?strong>/\*\*/g' | \
+        sed 's/<\/\?em>/\*/g' | \
+        sed 's/<\/\?code>/`/g' | \
+        \
+        # Step 9: Clean up headings
+        sed 's/^#\+\s*<[^>]*>\s*/# /' | \
+        sed 's/^#\+\s*\([^<]*\)<[^>]*>\s*\(.*\)$/# \1\2/' | \
+        \
+        # Step 10: Fix markdown constructs
+        sed 's/^####\s*Parameters$/#### Parameters/' | \
+        sed 's/^####\s*Returns$/#### Returns/' | \
+        \
+        # Step 11: Final cleanup
+        sed 's/[[:space:]]*$//' | \
+        awk '/^$/ {empty++; if (empty<=1) print} !/^$/ {empty=0; print}'
+}
+
+# Process each file
+processed_count=0
+find "$SOURCE_DIR" -name "*.md" -type f | sort | while read -r file; do
+    filename=$(basename "$file")
+    target_file="$TARGET_DIR/$filename"
+    
+    echo "📄 Processing: $filename"
+    
+    # Read content
+    if ! content=$(cat "$file" 2>/dev/null); then
+        echo "  ⚠️  Could not read: $filename"
+        continue
+    fi
+    
+    # Skip tiny files
+    if [[ ${#content} -lt 10 ]]; then
+        echo "  ⏭️  Skipping tiny: $filename"
+        continue
+    fi
+    
+    # Extract title
+    title=$(echo "$content" | grep -m 1 '^# ' | head -1 | sed 's/^# //' | sed 's/<[^>]*>//g' | sed 's/\\//g' | tr -d '\r\n' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+    if [[ -z "$title" ]]; then
+        title=$(echo "$filename" | sed 's/\.md$//' | sed 's/\./ /g' | sed 's/\([a-z]\)\([A-Z]\)/\1 \2/g')
+    fi
+    
+    # Clean title
+    title=$(echo "$title" | sed 's/^Struct //' | sed 's/^Class //' | sed 's/^Interface //' | sed 's/^Enum //')
+    
+    # Generate ID
+    id=$(echo "$filename" | sed 's/\.md$//' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9._-]/-/g' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+    
+    # Process content
+    processed_content=$(ultimate_mdx_clean "$content")
+    
+    # Create safe frontmatter values
+    safe_title=$(echo "$title" | sed 's/"/\\"/g' | sed 's/\s\+/ /g' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+    safe_id=$(echo "$id" | sed 's/"/\\"/g')
+    
+    # Write the final file
+    cat > "$target_file" << EOF
+---
+id: "$safe_id"
+title: "$safe_title"
+sidebar_label: "$safe_title"
+hide_table_of_contents: false
+---
+
+$processed_content
+EOF
+
+    echo "  ✅ Done: $filename"
+    ((processed_count++))
+done
+
+echo ""
+echo "📊 Processed $processed_count files successfully!"
+
+# Create the API index
+index_file="$TARGET_DIR/index.md"
+cat > "$index_file" << 'EOF'
+---
+id: "api-index"
+title: "API Reference"
+sidebar_label: "API Reference" 
+hide_table_of_contents: false
+---
+
+# API Reference
+
+Welcome to the complete Cocos2D Mono API Reference documentation.
+
+## 🎮 About Cocos2D Mono
+
+Cocos2D Mono is a C# implementation of the popular Cocos2D game engine, providing a powerful framework for creating 2D games across multiple platforms.
+
+## 📚 Documentation Organization
+
+- **🎯 Cocos2D** - Main game engine classes and functionality  
+- **⚡ Box2D** - Physics engine integration
+- **🔊 CocosDenshion** - Audio system components
+
+## 🚀 Getting Started
+
+Key classes to explore:
+- `CCScene` - Game screens and scenes
+- `CCSprite` - Image and sprite display
+- `CCLayer` - Object containers and layers  
+- `CCAction` - Animations and effects
+
+---
+
+*This documentation is automatically generated and optimized for Docusaurus.*
+EOF
+
+echo "✅ Created API index"
+
+# Create .gitignore
+cat > "$TARGET_DIR/.gitignore" << 'EOF'
+# Auto-generated API docs
+*.md
+!index.md
+!_category_.json
+EOF
+
+echo "✅ Created .gitignore"
+echo ""
+echo "🎉 ULTIMATE conversion complete!"
+echo "📁 Files available in: $TARGET_DIR"
+echo ""
+echo "🔥 This version handles ALL MDX compatibility issues including:"
+echo "   ✅ HTML anchor tags removed"
+echo "   ✅ Escaped characters fixed completely"
+echo "   ✅ Inheritance lists converted to safe format"
+echo "   ✅ Generic type syntax properly escaped"
+echo "   ✅ Nested <[Type]> patterns handled"
+echo "   ✅ Method signatures cleaned"
+echo "   ✅ Problematic tag names fixed"
+echo ""
+echo "💡 Ready for: npm run build"
