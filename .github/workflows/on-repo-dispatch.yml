@@ -50,17 +50,15 @@ jobs:
           cd cocos2d-mono/docfx
           docfx metadata --outputFormat markdown --output ../../docs
 
-      - name: 📝 Add frontmatter to API docs
+      - name: � Process DocFX markdown for MDX compatibility
         run: |
-          Get-ChildItem -Path "docs/api" -Filter "*.md" -Recurse | Where-Object { $_.Name -ne "introduction.md" } | ForEach-Object {
-            $content = Get-Content $_.FullName -Raw
-            if ($content -and -not $content.StartsWith("___")) {
-              $newContent = "___`n" + $content
-              Set-Content -Path $_.FullName -Value $newContent -NoNewline
-              Write-Host "Updated: $($_.FullName)"
-            }
-          }
-        shell: pwsh
+          # Make the scripts executable
+          chmod +x ./scripts/process-docfx-markdown-targeted-fix.sh
+          chmod +x ./scripts/process-docfx-markdown-universal-fix.sh
+          # Run the script to fix MDX compilation issues
+          ./scripts/process-docfx-markdown-universal-fix.sh
+          ./scripts/process-docfx-markdown-targeted-fix.sh
+        shell: bash
 
       - name: 📦 Create zip archive of docfx YAML
         run: |
