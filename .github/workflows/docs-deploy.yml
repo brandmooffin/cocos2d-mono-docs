@@ -76,6 +76,7 @@ jobs:
 
       - name: 📚 Build Docusaurus
         run: |
+          npm install
           npm run build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
