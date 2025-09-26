@@ -23,8 +23,8 @@ Then edit your Cocos2D-Mono PackageReference to point to 2.4.0 & MonoGame Packag
 
 ```xml
 <PackageReference Include="Cocos2D-Mono.{Platform}" Version="2.4.0" />
-<PackageReference Include="MonoGame.Framework.{Platform}" Version="3.8.2.1105" />
-<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.2.1105" />
+<PackageReference Include="MonoGame.Framework.{Platform}" Version="3.8.1" />
+<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1" />
 ```
 
 ## iOS/iPadOS, and Android
