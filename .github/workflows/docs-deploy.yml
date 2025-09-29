@@ -52,17 +52,27 @@ jobs:
       - name: 📘 Generate DocFX Metadata
         run: |
           cd cocos2d-mono/docfx
-          docfx metadata --outputFormat markdown --output ../../docs
+          docfx metadata
 
-      - name: � Process DocFX markdown for MDX compatibility
+      - name: 📝 Copy DocFX output to docs
         run: |
-          # Make the scripts executable
-          chmod +x ./scripts/process-docfx-markdown-targeted-fix.sh
-          chmod +x ./scripts/process-docfx-markdown-universal-fix.sh
-          # Run the script to fix MDX compilation issues
-          ./scripts/process-docfx-markdown-universal-fix.sh
-          ./scripts/process-docfx-markdown-targeted-fix.sh
-        shell: bash
+          # Copy the YAML files to the docs directory
+          if (Test-Path "cocos2d-mono/docfx/api") {
+            if (-not (Test-Path "docs/api")) {
+              New-Item -ItemType Directory -Path "docs/api" -Force
+            }
+            Copy-Item -Path "cocos2d-mono/docfx/api/*" -Destination "docs/api/" -Recurse -Force
+          }
+        shell: pwsh
+
+      - name: 📦 Install Node.js dependencies
+        run: npm install
+
+      - name: 📝 Convert DocFX YAML to MDX
+        run: |
+          # Process YAML files to MDX for Docusaurus compatibility
+          node scripts/process-docfx-output.js
+        shell: pwsh
 
       - name: 📦 Create zip archive of docfx YAML
         run: |
@@ -75,9 +85,7 @@ jobs:
           path: docfx-yaml.zip
 
       - name: 📚 Build Docusaurus
-        run: |
-          npm install
-          npm run build
+        run: npm run build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
 
