@@ -22,6 +22,7 @@ jobs:
           repository: brandmooffin/cocos2d-mono
           token: ${{ secrets.DOCS_REPO_PAT }}
           path: cocos2d-mono
+          ref: update/docfx-config-changes
 
       - name: ⚙️ Setup .NET SDK
         uses: actions/setup-dotnet@v4
@@ -50,18 +51,26 @@ jobs:
       - name: 📘 Generate DocFX Metadata
         run: |
           cd cocos2d-mono/docfx
-          docfx metadata --outputFormat markdown --output ../../docs
+          docfx metadata
 
-      - name: 📝 Add frontmatter to API docs
+      - name: 📝 Copy DocFX output to docs
         run: |
-          Get-ChildItem -Path "docs/api" -Filter "*.md" -Recurse | Where-Object { $_.Name -ne "introduction.md" } | ForEach-Object {
-            $content = Get-Content $_.FullName -Raw
-            if ($content -and -not $content.StartsWith("___")) {
-              $newContent = "___`n" + $content
-              Set-Content -Path $_.FullName -Value $newContent -NoNewline
-              Write-Host "Updated: $($_.FullName)"
+          # Copy the YAML files to the docs directory
+          if (Test-Path "cocos2d-mono/docfx/api") {
+            if (-not (Test-Path "docs/api")) {
+              New-Item -ItemType Directory -Path "docs/api" -Force
             }
+            Copy-Item -Path "cocos2d-mono/docfx/api/*" -Destination "docs/api/" -Recurse -Force
           }
+        shell: pwsh
+
+      - name: 📦 Install Node.js dependencies
+        run: npm install
+
+      - name: 📝 Convert DocFX YAML to MDX
+        run: |
+          # Process YAML files to MDX for Docusaurus compatibility
+          node scripts/process-docfx-output.js
         shell: pwsh
 
       - name: 📦 Create zip archive of docfx YAML
@@ -75,9 +84,7 @@ jobs:
           path: docfx-yaml.zip
 
       - name: 📚 Build Docusaurus
-        run: |
-          npm install
-          npm run build
+        run: npm run build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
 
