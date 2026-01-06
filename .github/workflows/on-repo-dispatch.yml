@@ -24,16 +24,17 @@ jobs:
       - name: ⚙️ Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "10.0.x"
 
       - name: 🧰 Install DocFX
         run: dotnet tool install -g docfx
 
       - name: Install required .NET workloads
         run: |
-          dotnet workload update --version 8.0.400
+          dotnet workload update --version 10.0.101
           dotnet workload install android
           dotnet workload install ios
+          dotnet workload install maui
 
       - name: 📦 Restore API project
         run: |
