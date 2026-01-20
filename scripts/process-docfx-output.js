@@ -205,7 +205,7 @@ function generateClassComponent(classItem, data) {
 }
 
 function generateStructComponent(structItem, data) {
-  // Structs are similar to classes but with some differences
+  // Structs are rendered using the ApiClass component but labeled as "Struct" to distinguish their type
   const name = sanitizeForJsx(structItem.name);
   const namespace = sanitizeForJsx(structItem.namespace || "");
   const nameAttr = name ? ` name="${name}"` : "";
