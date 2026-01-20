@@ -22,7 +22,6 @@ jobs:
           repository: brandmooffin/cocos2d-mono
           token: ${{ secrets.DOCS_REPO_PAT }}
           path: cocos2d-mono
-          ref: update/docfx-config-changes
 
       - name: ⚙️ Setup .NET SDK
         uses: actions/setup-dotnet@v4
