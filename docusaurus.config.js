@@ -27,7 +27,25 @@ const config = {
     locales: ["en"],
   },
 
-  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
+  plugins: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        // Whether to index docs pages
+        indexDocs: true,
+        // Whether to index blog pages
+        indexBlog: true,
+        // Whether to index static pages
+        indexPages: false,
+        // Language of your documentation
+        language: "en",
+        // Hashed search files for better performance
+        hashed: true,
+        // Dont index these attributes
+        docsRouteBasePath: "/docs",
+      },
+    ],
+  ],
 
   presets: [
     [
