@@ -28,7 +28,7 @@ You'll need these assets for collectibles:
 - `coin.png` - Coin sprite
 - `coin_pickup.wav` - Collection sound effect (optional)
 
-Add these to your Content folder. Find them in the [complete project reference](https://github.com/brandmooffin/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer/Final/Platformer/Content).
+Add these to your Content folder. Find them in the [complete project reference](https://github.com/Cocos2D-Mono/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer/Final/Platformer/Content).
 
 ## Step 2: Create Collectible Class
 
@@ -170,7 +170,7 @@ At this point, you should have:
 
 ## Complete Code Reference
 
-You can find the complete code for this part in the [tutorial samples repository](https://github.com/brandmooffin/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer/Checkpoints/Part%205).
+You can find the complete code for this part in the [tutorial samples repository](https://github.com/Cocos2D-Mono/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer/Checkpoints/Part%205).
 
 ## Congratulations! 🎉
 
@@ -196,6 +196,6 @@ Consider adding these features to further improve your game:
 
 ## Final Complete Code Reference
 
-The complete, final project with all assets can be found in the [tutorial samples repository](https://github.com/brandmooffin/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer/Final).
+The complete, final project with all assets can be found in the [tutorial samples repository](https://github.com/Cocos2D-Mono/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer/Final).
 
 Thank you for following this tutorial series! You now have the foundation to create more complex 2D games with cocos2d-mono.

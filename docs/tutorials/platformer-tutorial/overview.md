@@ -76,4 +76,4 @@ Ready to start building? Head over to [Part 1: Project Setup and Assets](./part-
 
 ## Full Project Reference
 
-You can check out the complete platformer project [here](https://github.com/brandmooffin/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer) for reference. The full project contains all the assets used like sprites and sound effects.
+You can check out the complete platformer project [here](https://github.com/Cocos2D-Mono/cocos2d-mono-samples/tree/main/Tutorial%20Samples/Platformer) for reference. The full project contains all the assets used like sprites and sound effects.

@@ -95,7 +95,7 @@ const config = {
             label: "Tutorials",
           },
           {
-            href: "https://github.com/brandmooffin/cocos2d-mono",
+            href: "https://github.com/Cocos2D-Mono/cocos2d-mono",
             label: "GitHub",
             position: "right",
           },
@@ -130,11 +130,11 @@ const config = {
             items: [
               {
                 label: "Issues",
-                href: "https://github.com/brandmooffin/cocos2d-mono/issues",
+                href: "https://github.com/Cocos2D-Mono/cocos2d-mono/issues",
               },
               {
                 label: "Discussions",
-                href: "https://github.com/brandmooffin/cocos2d-mono/discussions/landing",
+                href: "https://github.com/Cocos2D-Mono/cocos2d-mono/discussions/landing",
               },
             ],
           },
@@ -143,7 +143,7 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/brandmooffin/cocos2d-mono",
+                href: "https://github.com/Cocos2D-Mono/cocos2d-mono",
               },
             ],
           },

@@ -5,7 +5,7 @@ authors: [brandmooffin]
 tags: [update, release, 2.4.7]
 ---
 
-Cocos2D-Mono 2.4.7 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.7) to see what's change...or just read below.
+Cocos2D-Mono 2.4.7 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.4.7) to see what's change...or just read below.
 
 ## What's Changed
     - Fix issue with TextureAtlas Data not purging correctly
@@ -21,7 +21,7 @@ Cocos2D-Mono 2.4.7 is out now! Go check out the [release notes](https://github.c
     - Adjust position to reduce line artifacts on fonts
     - Improvements with cleanup and dispose objects
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.4.6...2.4.7
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.4.6...2.4.7
 
 NuGet Packages:
 
@@ -43,7 +43,7 @@ NuGet Packages:
 This will only have the MonoGame Framework dependency and not the MonoGame Content Builder Task. 
 
 The benefits for these Core libraries are speed improvements to compilation and resolves an existing vulnerability that exists within `MonoGame.Content.Builder.Task`
-![image](https://github.com/brandmooffin/cocos2d-mono/assets/1774581/6d869242-8d2a-4343-90ec-0372f4293b72)
+![image](https://github.com/Cocos2D-Mono/cocos2d-mono/assets/1774581/6d869242-8d2a-4343-90ec-0372f4293b72)
 
 The downside to this is assets will need to be built manually prior to compilation, either via command line using the [dotnet tool](https://monogame.net/articles/tools/mgcb.html) or the [MGCB Editor](https://monogame.net/articles/tools/mgcb_editor.html).
 

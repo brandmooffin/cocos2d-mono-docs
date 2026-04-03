@@ -10,7 +10,7 @@ To obtain the code you will need a git client. Either command line or graphical.
 
 Using the git command line you will need to clone the git repository.
 
-> $ git clone https://github.com/brandmooffin/cocos2d-mono.git
+> $ git clone https://github.com/Cocos2D-Mono/cocos2d-mono.git
 
 Wait until the clone has finished.
 
