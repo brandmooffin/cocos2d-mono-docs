@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # More Help?
 
-If you need help, please ask questions on our [community discussions](https://github.com/brandmooffin/cocos2d-mono/discussions).
+If you need help, please ask questions on our [community discussions](https://github.com/Cocos2D-Mono/cocos2d-mono/discussions).
 
 Thanks for reading this guide and helping make Cocos2d-Mono great!
 

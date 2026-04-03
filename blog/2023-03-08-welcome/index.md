@@ -7,7 +7,7 @@ tags: [update, release, 2.4.0]
 
 ![Release Logo](./logo-full-release.png)
 
-Cocos2D-Mono 2.4.0 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.0) to see what's change...or just read below.
+Cocos2D-Mono 2.4.0 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.4.0) to see what's change...or just read below.
 
 ## What's Changed
 * Support for MonoGame 3.8.1
@@ -20,7 +20,7 @@ Cocos2D-Mono 2.4.0 is out now! Go check out the [release notes](https://github.c
 * Updated documentation
 
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.3.12...2.4.0
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.3.12...2.4.0
 
 NuGet Packages:
 

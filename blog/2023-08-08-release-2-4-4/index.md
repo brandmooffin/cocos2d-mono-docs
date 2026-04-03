@@ -5,7 +5,7 @@ authors: [brandmooffin]
 tags: [update, release, 2.4.4]
 ---
 
-Cocos2D-Mono 2.4.4 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.4) to see what's change...or just read below.
+Cocos2D-Mono 2.4.4 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.4.4) to see what's change...or just read below.
 
 ## What's Changed
     - New Test TapTouchTest for CCTapNode
@@ -16,7 +16,7 @@ Cocos2D-Mono 2.4.4 is out now! Go check out the [release notes](https://github.c
     - Add TextureFilename property for CCSpriteFrame
 
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.4.3...2.4.4
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.4.3...2.4.4
 
 NuGet Packages:
 

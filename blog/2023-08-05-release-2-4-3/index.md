@@ -5,7 +5,7 @@ authors: [brandmooffin]
 tags: [update, release, 2.4.3]
 ---
 
-Cocos2D-Mono 2.4.3 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.3) to see what's change...or just read below.
+Cocos2D-Mono 2.4.3 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.4.3) to see what's change...or just read below.
 
 ## What's Changed
     - Support for AddedToScene for CCLayer
@@ -33,7 +33,7 @@ Cocos2D-Mono 2.4.3 is out now! Go check out the [release notes](https://github.c
     - New Pi properties for CCMathHelper
 
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.4.2...2.4.3
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.4.2...2.4.3
 
 NuGet Packages:
 

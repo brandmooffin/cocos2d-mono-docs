@@ -5,7 +5,7 @@ authors: [brandmooffin]
 tags: [update, release, 2.4.5]
 ---
 
-Cocos2D-Mono 2.4.5 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.5) to see what's change...or just read below.
+Cocos2D-Mono 2.4.5 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.4.5) to see what's change...or just read below.
 
 ## What's Changed
     - Maintain CCSprite scale when changing SpriteFrame
@@ -15,7 +15,7 @@ Cocos2D-Mono 2.4.5 is out now! Go check out the [release notes](https://github.c
     - Removed CCActionState from certain CCActions and aligned them with existing CCActions
 
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.4.4...2.4.5
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.4.4...2.4.5
 
 NuGet Packages:
 

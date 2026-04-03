@@ -25,11 +25,11 @@ Each part builds on the previous one and includes a checkpoint so you can verify
 
 Learning by example is often the best approach. You can find complete sample projects for cocos2d-mono in the following locations:
 
-1. **Tutorial Samples Repository**: The complete code for the tutorials is available in the [cocos2d-mono-samples](https://github.com/brandmooffin/cocos2d-mono-samples) repository. These samples include all assets and code needed to run the projects.
+1. **Tutorial Samples Repository**: The complete code for the tutorials is available in the [cocos2d-mono-samples](https://github.com/Cocos2D-Mono/cocos2d-mono-samples) repository. These samples include all assets and code needed to run the projects.
 
-2. **Test Projects**: The framework includes a collection of test projects demonstrating specific features. You can find these in the [Tests directory](https://github.com/brandmooffin/cocos2d-mono/tree/master/Tests) of the main repository.
+2. **Test Projects**: The framework includes a collection of test projects demonstrating specific features. You can find these in the [Tests directory](https://github.com/Cocos2D-Mono/cocos2d-mono/tree/master/Tests) of the main repository.
 
-3. **Community Projects**: Check the [Discussions](https://github.com/brandmooffin/cocos2d-mono/discussions) section of the GitHub repository for community-shared projects and examples.
+3. **Community Projects**: Check the [Discussions](https://github.com/Cocos2D-Mono/cocos2d-mono/discussions) section of the GitHub repository for community-shared projects and examples.
 
 ## Learning Resources
 
@@ -40,8 +40,8 @@ To deepen your understanding of cocos2d-mono, consider these additional resource
 - **[Development Guide](../developing/overview.md)** - Best practices and development workflows
 
 ### Community and Support
-- **[GitHub Discussions](https://github.com/brandmooffin/cocos2d-mono/discussions)** - Ask questions and share your knowledge
-- **[Issue Tracker](https://github.com/brandmooffin/cocos2d-mono/issues)** - Report bugs or request features
+- **[GitHub Discussions](https://github.com/Cocos2D-Mono/cocos2d-mono/discussions)** - Ask questions and share your knowledge
+- **[Issue Tracker](https://github.com/Cocos2D-Mono/cocos2d-mono/issues)** - Report bugs or request features
 
 ### External Resources
 - **[MonoGame Documentation](https://docs.monogame.net/)** - Since cocos2d-mono is built on MonoGame, many concepts transfer

@@ -5,7 +5,7 @@ authors: [brandmooffin]
 tags: [update, release, 2.4.8]
 ---
 
-Cocos2D-Mono 2.4.8 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.4.8) to see what's change...or just read below.
+Cocos2D-Mono 2.4.8 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.4.8) to see what's change...or just read below.
 
 ## What's Changed
     - Support for CCVector2
@@ -45,7 +45,7 @@ Cocos2D-Mono 2.4.8 is out now! Go check out the [release notes](https://github.c
     - SystemFontSpacing for character spacing
     - CCLabel improvements for Android and iOS  
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.4.7...2.4.8
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.4.7...2.4.8
 
 NuGet Packages:
 

@@ -7,7 +7,7 @@ tags: [update, release, 2.5.0]
 
 ![Release Logo](./logo-full-release.png)
 
-Cocos2D-Mono 2.5.0 is out now! Go check out the [release notes](https://github.com/brandmooffin/cocos2d-mono/releases/tag/2.5.0) to see what's change...or just read below. 
+Cocos2D-Mono 2.5.0 is out now! Go check out the [release notes](https://github.com/Cocos2D-Mono/cocos2d-mono/releases/tag/2.5.0) to see what's change...or just read below. 
 
 There's also a lot of news to take a look at too!
 
@@ -25,7 +25,7 @@ There's also a lot of news to take a look at too!
     - Remove early config init during CCLabel init
     - Add method to set atlas texture size for CCLabel
 
-**Full Changelog**: https://github.com/brandmooffin/cocos2d-mono/compare/2.4.8...2.5.0
+**Full Changelog**: https://github.com/Cocos2D-Mono/cocos2d-mono/compare/2.4.8...2.5.0
 
 NuGet Packages:
 

@@ -18,7 +18,7 @@ To make things as easy as possible templates for Visual Studio are available as 
 
 ## Samples
 
-Samples can be found [here](https://github.com/brandmooffin/cocos2d-mono/tree/master/Samples)
+Samples can be found [here](https://github.com/Cocos2D-Mono/cocos2d-mono/tree/master/Samples)
 
 ## NuGet Packages
 
