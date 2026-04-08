@@ -17,7 +17,7 @@ jobs:
       - name: 🔑 Checkout cocos2d-mono
         uses: actions/checkout@v3
         with:
-          repository: brandmooffin/cocos2d-mono
+          repository: Cocos2D-Mono/cocos2d-mono
           token: ${{ secrets.DOCS_REPO_PAT }}
           path: cocos2d-mono
 
